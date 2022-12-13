@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Views\Static\**" />
+    <Content Remove="Interfaces\**" />
+    <Content Remove="Views\Static\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Views\Static\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="Views\Static\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\StaticController.cs" />
+    <Compile Remove="Models\UsersModel.cs" />
+    <Compile Remove="Services\UserService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+
+
+</Project>

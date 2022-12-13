@@ -1,0 +1,40 @@
+﻿@using ExampleWebsite.Models
+@model Vacancy
+@{
+    ViewData["Title"] = "Static Page";
+}
+
+    <div class="text-center">
+        @{
+            var prevDisabled = !@Model.HasPrevious ? "disabled" : "";
+            var nextDisabled = !@Model.HasNext ? "disabled" : "";
+        }
+        <a asp-action="Index"
+           asp-route-index="@(Model.Index - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-index="@(Model.Index + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+
+        <table style="width:100%">
+            <tbody>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                </tr>
+                @foreach (var u in Model.Vacancies)
+                {
+                    <tr>
+                        <td>@u.Salary</td>
+                        <td>@u.VacancyDescription</td>
+                        <td>@u.Location</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

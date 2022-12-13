@@ -1,0 +1,57 @@
+﻿@using ExampleWebsite.Models
+@model Vacancy
+@{
+    ViewData["Title"] = "Dynamic Page";
+}
+
+@section Scripts{
+    <script>
+        var index = 0;
+        function updateTable() {
+            $.getJSON('dynamic/test?index='+index, function (obj) {
+                debugger;
+                console.log(obj);
+                index = obj.index;
+                if(obj.hasNext)
+                    $('#next').removeClass('disabled');
+                else
+                    $('#next').addClass('disabled');
+
+                if(obj.hasPrevious)
+                    $('#prev').removeClass('disabled');
+                else
+                    $('#prev').addClass('disabled');
+
+                $('table').find("tr:gt(0)").remove();
+                for (var v of obj.vacancies) {
+                    $('table tr:last').after('<tr><td>'+v.salary+'</td><td>'+v.typeofEmployment+'</td><td>'+v.vacancyDescription+'</td><td>'+v.candidaterequirements+'</td></tr>');
+                }
+            });
+        }
+        $('#next').on('click', function () { index++; updateTable(); })
+        $('#prev').on('click', function () { index--; updateTable(); })
+        updateTable();
+    </script>
+}
+
+<div class="text-center">
+    <a style="cursor: pointer;"
+       class="btn btn-default" id="prev">
+        Previous
+    </a>
+    <a style="cursor: pointer;"
+       class="btn btn-default" id="next">
+        Next
+    </a>
+
+    <table class="table" style="width:100%">
+        <tbody>
+            <tr>
+                <th>Salary</th>
+                <th>Type of Employment</th>
+                <th>Vacancy Description</th>
+                <th>Candidate Requirements</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
